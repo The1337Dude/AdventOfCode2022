@@ -24,12 +24,18 @@
     <ClCompile Include="Source\Solution1\AoCSolution1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Solution24\AoCSolution24.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Helpers\AoCHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Solution1\AoCSolution1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Solution24\AoCSolution24.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
