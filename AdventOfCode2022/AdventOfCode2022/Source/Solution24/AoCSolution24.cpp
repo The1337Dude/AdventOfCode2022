@@ -28,6 +28,57 @@ void AoCSolution24::Initialize(const vector<string>& Input)
 
 // Can do a breadth first search evaluating each choice from every move
 
+
+// Looks like the stars indeed need to align for this one
+// Start from the destination see when the last node is free
+	// Keep ticking the clock till the last node opens up
+	// Run breadth first search only till this particular 
+
+
+// From Start to Finish as soon as possible
+	// map keeps changing
+	// while we keep ticking the map
+		// When does a path from start to end emerge?
+
+	// Minimum cost spanning tree -> which connects the first and last nodes within the minimum number of ticks
+
+
+// Cost:
+// Start Can stay here for a while
+// Can stay in two nodes only for a while
+// F(a,b) = a needs to be free now and b needs to be free within the timespan of a + 1
+// 
+// a -> ---
+// b ->  -- -
+// c ->   -  -
+// F(a,b,c) = F(b) + 1
+
+
+// Define a numeric expression and try to minimize our cost 
+
+// Why the fuck I'm I trying to use a cost function ????
+// Cost = Time
+// T - time from the start 
+// F(Terrrain, T, a, b) = 
+// 
+// Same node a,a cost = a if a is free in the next move
+// Same node a,a cost = -1(infinity) if a is not free
+
+// a,b (a and b are adjacent) F(a,b) 
+
+
+// From Start to Finish
+// Terrain keeps changing
+// 
+
+
+// void(Coords A, Coords B, Terrain)
+
+int GetMinTicksAfterWhichAPositionIsFree(const Coordinates& Position, const STerrain& Terrain)
+{
+	return 0;
+}
+
 string AoCSolution24::GetResult(const int Part)
 {
 	const int TerrainHeight = ProblemInput.size() - 2;
@@ -44,7 +95,7 @@ string AoCSolution24::GetResult(const int Part)
 		for (int X = 1; X < ProblemInput[Y].length() - 1; X++)
 		{
 			SBlizzard Blizzard;
-			Blizzard.CurrentPosition = { X - 1, Y - 1 };
+			Blizzard.StartingPosition = { X - 1, Y - 1 };
 			const char Character = ProblemInput[Y][X];
 			cout << Character << " ";
 			switch (Character)
@@ -77,9 +128,10 @@ string AoCSolution24::GetResult(const int Part)
 
 	SPlayer Player({ 0, -1 }, { TerrainWidth - 1, TerrainHeight });
 
-	SimQueue.push({ Player, Terrain });
+	SimQueue.push({ Player , 0 });
 
-	DrawTerrain(Player, Terrain);
+	DrawTerrain(Player, Terrain, 0);
+
 
 	//return to_string(MinMoves(Player, Terrain));
 
@@ -87,30 +139,25 @@ string AoCSolution24::GetResult(const int Part)
 	while (!SimQueue.empty())
 	{
 		static int epochCount = 0;
-		auto SimIteration = SimQueue.top();
-		auto PlayerIteration = SimIteration.first;
-		auto TerrainIteration = SimIteration.second;
-
-		if (epochCount % 1000 == 0)
-		{
-			DrawTerrain(PlayerIteration, TerrainIteration);
-		}
-		
+		auto PlayerIteration = SimQueue.front().first;
+		auto Time = SimQueue.front().second;
 		SimQueue.pop();
+
+		Time++;
+
+		DrawTerrain(PlayerIteration, Terrain, Time);
 
 		if (PlayerIteration.HasReachedDestination())
 		{
-			return to_string(SimIteration.first.PlayerMoves);
+			return to_string(PlayerIteration.PlayerMoves);
 		}
 
-		TerrainIteration.Tick();
-
-		const auto& PossibleMoves = PlayerIteration.GetPossibleMoves(TerrainIteration);
+		const auto& PossibleMoves = PlayerIteration.GetPossibleMoves(Terrain, Time);
 		for (const auto& NextMove : PossibleMoves)
 		{
 			auto NewPlayer = PlayerIteration;
 			NewPlayer.UpdatePosition(NextMove);
-			SimQueue.push({ NewPlayer, TerrainIteration});
+			SimQueue.push({ NewPlayer, Time });
 		}
 
 		epochCount++;
@@ -119,41 +166,14 @@ string AoCSolution24::GetResult(const int Part)
 	return string();
 }
 
-int AoCSolution24::MinMoves(SPlayer& PlayerIteration, STerrain& TerrainIteration)
-{
-	if (PlayerIteration.HasReachedDestination())
-	{
-		return PlayerIteration.PlayerMoves;
-	}
-
-	TerrainIteration.Tick();
-	const auto& PossibleMoves = PlayerIteration.GetPossibleMoves(TerrainIteration);
-
-	vector<int> MinResults;
-	for (const auto& NextMove : PossibleMoves)
-	{
-		auto NewPlayer = PlayerIteration;
-		NewPlayer.UpdatePosition(NextMove);
-		
-		MinResults.push_back(MinMoves(NewPlayer, TerrainIteration));
-	}
-
-	if (MinResults.size() != 0)
-	{
-		return *min_element(MinResults.begin(), MinResults.end());
-	}
-
-	return 0;
-}
-
-void AoCSolution24::DrawTerrain(SPlayer& Player, STerrain& Terrain)
+void AoCSolution24::DrawTerrain(SPlayer& Player, STerrain& Terrain, const int CurrentTime)
 {
 	for (int height = 0; height < Terrain.Height; height++)
 	{
 		for (int width = 0; width < Terrain.Width; width++)
 		{
 			const Coordinates Coords{ width, height };
-			const auto IsNodeFree = Terrain.IsNodeFree(Coords);
+			const auto IsNodeFree = Terrain.IsNodeFree(Coords, Player.PlayerMoves);
 			if (IsNodeFree)
 			{
 				if (Player.CurrentPosition.first == width && Player.CurrentPosition.second == height)
@@ -162,12 +182,12 @@ void AoCSolution24::DrawTerrain(SPlayer& Player, STerrain& Terrain)
 				}
 				else
 				{
-					cout << ".";
+					cout << " ";
 				}
 			}
 			else
 			{
-				cout << " ";
+				cout << "^";
 			}
 		}
 		cout << endl;
