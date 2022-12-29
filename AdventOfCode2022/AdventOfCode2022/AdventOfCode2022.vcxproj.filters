@@ -30,6 +30,9 @@
     <ClCompile Include="Source\Solution5\AoCSolution5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Solution10\AoCSolution10.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Helpers\AoCHelpers.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Solution5\AoCSolution5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Solution10\AoCSolution10.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

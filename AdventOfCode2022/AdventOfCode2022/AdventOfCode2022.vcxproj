@@ -142,12 +142,14 @@
   <ItemGroup>
     <ClCompile Include="AdventOfCode2022.cpp" />
     <ClCompile Include="Source\Helpers\AoCHelpers.cpp" />
+    <ClCompile Include="Source\Solution10\AoCSolution10.cpp" />
     <ClCompile Include="Source\Solution1\AoCSolution1.cpp" />
     <ClCompile Include="Source\Solution24\AoCSolution24.cpp" />
     <ClCompile Include="Source\Solution5\AoCSolution5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Helpers\AoCHelpers.h" />
+    <ClInclude Include="Source\Solution10\AoCSolution10.h" />
     <ClInclude Include="Source\Solution1\AoCSolution1.h" />
     <ClInclude Include="Source\Solution24\AoCSolution24.h" />
     <ClInclude Include="Source\Solution5\AoCSolution5.h" />
