@@ -144,11 +144,13 @@
     <ClCompile Include="Source\Helpers\AoCHelpers.cpp" />
     <ClCompile Include="Source\Solution1\AoCSolution1.cpp" />
     <ClCompile Include="Source\Solution24\AoCSolution24.cpp" />
+    <ClCompile Include="Source\Solution5\AoCSolution5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Helpers\AoCHelpers.h" />
     <ClInclude Include="Source\Solution1\AoCSolution1.h" />
     <ClInclude Include="Source\Solution24\AoCSolution24.h" />
+    <ClInclude Include="Source\Solution5\AoCSolution5.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

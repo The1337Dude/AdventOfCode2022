@@ -1,5 +1,6 @@
 #include "AoCHelpers.h"
 #include <filesystem>
+#include <sstream>
 using namespace std;
 
 namespace AoCHelpers
@@ -24,6 +25,24 @@ namespace AoCHelpers
 			{
 				Result.push_back(buffer);
 			}
+		}
+
+		return Result;
+	}
+
+	vector<string> Tokenize(const string& InputString, const char& Token)
+	{
+		vector<string> Result;
+
+		// stringstream class check1
+		stringstream stream(InputString);
+
+		string intermediate;
+
+		// Tokenizing w.r.t. space ' '
+		while (getline(stream, intermediate, Token))
+		{
+			Result.push_back(intermediate);
 		}
 
 		return Result;

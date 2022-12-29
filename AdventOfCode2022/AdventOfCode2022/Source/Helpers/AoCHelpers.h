@@ -13,6 +13,7 @@ namespace AoCHelpers
 {
 	vector<string> ProcessInput(const int ProblemNumber);
 	vector<string> ProcessInput(const string& Path);
+	vector<string> Tokenize(const string& InputString, const char& Token);
 }
 
 class IAocSolution
