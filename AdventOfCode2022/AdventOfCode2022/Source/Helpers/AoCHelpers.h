@@ -14,6 +14,8 @@ namespace AoCHelpers
 	vector<string> ProcessInput(const int ProblemNumber);
 	vector<string> ProcessInput(const string& Path);
 	vector<string> Tokenize(const string& InputString, const char& Token);
+	float distance(int x1, int y1, int x2, int y2);
+	float distance(int x1, int y1, int x2, int y2);
 }
 
 class IAocSolution

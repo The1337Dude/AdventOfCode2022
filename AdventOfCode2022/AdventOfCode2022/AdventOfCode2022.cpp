@@ -1,23 +1,16 @@
 #include <iostream>
 using namespace std;
 
-#include "Source/Solution1/AoCSolution1.h"
-#include "Source/Solution24/AoCSolution24.h"
-#include "Source/Solution5/AoCSolution5.h"
-#include "Source/Solution10/AoCSolution10.h"
+#include "Source/Solution9/AoCSolution9.h"
 
 int main()
 {
-	/*AoCSolution1 Solution;*/
-	//AoCSolution24 Solution;
+	shared_ptr<IAocSolution> Solution = make_shared<AoCSolution9>();
 
-	/*AoCSolution5 Solution;*/
-
-	AoCSolution10 Solution;
-	Solution.Initialize(AoCHelpers::ProcessInput(10));
+	Solution->Initialize(AoCHelpers::ProcessInput(9));
 
 	const int Part2 = 2;
-	cout << Solution.GetResult(Part2) << endl;
+	cout << Solution->GetResult(Part2) << endl;
 
 	return 0;
 }
